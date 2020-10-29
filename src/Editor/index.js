@@ -22,7 +22,7 @@ const Editor = ({ onChange, data, placeholder }) => {
       data={data}
       config={{
         placeholder,
-        plugins: [BlockQuote, ListStyle, PasteFromOffice, Heading, Essentials, Paragraph, Bold, Italic, Strikethrough, Link],
+        plugins: [Link, BlockQuote, ListStyle, PasteFromOffice, Heading, Essentials, Paragraph, Bold, Italic, Strikethrough],
         toolbar: ['heading', '|', 'bold', 'italic', 'strikethrough', '|', 'link', 'blockQuote', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo']
       }}
       onChange={(event, editor) => {
