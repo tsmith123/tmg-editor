@@ -1,4 +1,5 @@
 const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { styles } = require('@ckeditor/ckeditor5-dev-utils')
 
 module.exports = {
@@ -22,15 +23,15 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules|ckeditor5-/,
+        exclude: /node_modules/,
         use: ['babel-loader']
       },
       {
-        test: /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/,
+        test: /\.svg$/,
         use: ['raw-loader']
       },
       {
-        test: /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/,
+        test: /\.css$/,
         use: [
           {
             loader: 'style-loader',
