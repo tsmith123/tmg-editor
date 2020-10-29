@@ -1,9 +1,8 @@
 const path = require('path')
-// const { styles } = require('@ckeditor/ckeditor5-dev-utils')
+const { styles } = require('@ckeditor/ckeditor5-dev-utils')
 
 module.exports = {
   mode: 'production',
-  devtool: 'source-map',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -23,14 +22,35 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          compact: false,
-          presets: [
-            '@babel/preset-react'
-          ]
-        }
+        exclude: /node_modules|ckeditor5-/,
+        use: ['babel-loader']
+      },
+      {
+        test: /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/,
+        use: ['raw-loader']
+      },
+      {
+        test: /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              injectType: 'singletonStyleTag',
+              attributes: {
+                'data-cke': true
+              }
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: styles.getPostCssConfig({
+              themeImporter: {
+                themePath: require.resolve('@ckeditor/ckeditor5-theme-lark')
+              },
+              minify: true
+            })
+          }
+        ]
       }
     ]
   }
