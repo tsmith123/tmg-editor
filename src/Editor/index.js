@@ -11,7 +11,7 @@ import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold'
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic'
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough'
 import List from '@ckeditor/ckeditor5-list/src/list'
-// import Link from '@ckeditor/ckeditor5-link/src/link'
+import Link from '@ckeditor/ckeditor5-link/src/link'
 // import AutoLink from '@ckeditor/ckeditor5-link/src/autolink'
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice'
@@ -23,7 +23,7 @@ const Editor = ({ onChange, data, placeholder }) => {
       data={data}
       config={{
         placeholder,
-        plugins: [BlockQuote, List, PasteFromOffice, Heading, Essentials, Paragraph, Bold, Italic, Strikethrough],
+        plugins: [Link, BlockQuote, List, PasteFromOffice, Heading, Essentials, Paragraph, Bold, Italic, Strikethrough],
         toolbar: ['heading', '|', 'bold', 'italic', 'strikethrough', '|', 'link', 'blockQuote', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo']
       }}
       onChange={(event, editor) => {
