@@ -1,5 +1,4 @@
 const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { styles } = require('@ckeditor/ckeditor5-dev-utils')
 
 module.exports = {
