@@ -14,6 +14,7 @@ import List from '@ckeditor/ckeditor5-list/src/list'
 import Link from '@ckeditor/ckeditor5-link/src/link'
 import AutoLink from '@ckeditor/ckeditor5-link/src/autolink'
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote'
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript.js'
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice'
 
 const Editor = ({ onChange, data, placeholder }) => {
@@ -23,8 +24,21 @@ const Editor = ({ onChange, data, placeholder }) => {
       data={data}
       config={{
         placeholder,
-        plugins: [Link, AutoLink, BlockQuote, List, PasteFromOffice, Heading, Essentials, Paragraph, Bold, Italic, Strikethrough],
-        toolbar: ['heading', '|', 'bold', 'italic', 'strikethrough', '|', 'link', 'blockQuote', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo']
+        plugins: [
+          AutoLink,
+          BlockQuote,
+          Bold,
+          Essentials,
+          Heading,
+          Italic,
+          Link,
+          List,
+          PasteFromOffice,
+          Paragraph,
+          Strikethrough,
+          Superscript
+        ],
+        toolbar: ['heading', '|', 'bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo']
       }}
       onChange={(event, editor) => {
         const data = editor.getData()
