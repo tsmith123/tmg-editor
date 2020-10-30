@@ -38,7 +38,14 @@ const Editor = ({ onChange, data, placeholder }) => {
           Strikethrough,
           Superscript
         ],
-        toolbar: ['heading', '|', 'bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo']
+        heading: {
+          options: [
+            { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },
+            { model: 'heading3', view: 'h3', title: 'Large', class: 'ck-heading_heading3' },
+            { model: 'heading4', view: 'h4', title: 'Medium', class: 'ck-heading_heading4' }
+          ]
+        },
+        toolbar: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'bulletedList', 'numberedList', '|', 'heading', '|', 'undo', 'redo']
       }}
       onChange={(event, editor) => {
         const data = editor.getData()
