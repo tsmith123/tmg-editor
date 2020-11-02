@@ -25,6 +25,8 @@
     "@ckeditor/ckeditor5-paragraph": "^23.0.0",
     "@ckeditor/ckeditor5-paste-from-office": "^23.0.0",
     "@ckeditor/ckeditor5-react": "^2.1.0",
+    "@ckeditor/ckeditor5-remove-format": "^23.1.0",
+    "@ckeditor/ckeditor5-special-characters": "^23.1.0",
     "@ckeditor/ckeditor5-theme-lark": "^23.0.0"
   },
   "peerDependencies": {
