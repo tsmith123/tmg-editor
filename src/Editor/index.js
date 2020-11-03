@@ -49,6 +49,18 @@ const Editor = ({ onChange, data, placeholder }) => {
             { model: 'heading4', view: 'h4', title: 'Medium', class: 'ck-heading_heading4' }
           ]
         },
+        link: {
+          decorators: {
+            addTargetToExternalLinks: {
+              mode: 'manual',
+              label: 'no-follow commercial link',
+              defaultValue: false,
+              attributes: {
+                rel: 'nofollow'
+              }
+            }
+          }
+        },
         toolbar: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo']
       }}
       onChange={(event, editor) => {
