@@ -50,6 +50,7 @@ const Editor = ({ onChange, data, placeholder }) => {
           ]
         },
         link: {
+          defaultProtocol: 'http://',
           decorators: {
             addTargetToExternalLinks: {
               mode: 'manual',
