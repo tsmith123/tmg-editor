@@ -17,6 +17,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-basic-styles": "^23.0.0",
     "@ckeditor/ckeditor5-block-quote": "^23.0.0",
+    "@ckeditor/ckeditor5-core": "^23.1.0",
     "@ckeditor/ckeditor5-editor-classic": "^23.0.0",
     "@ckeditor/ckeditor5-essentials": "^23.0.0",
     "@ckeditor/ckeditor5-heading": "^23.0.0",
@@ -27,7 +28,8 @@
     "@ckeditor/ckeditor5-react": "^2.1.0",
     "@ckeditor/ckeditor5-remove-format": "^23.1.0",
     "@ckeditor/ckeditor5-special-characters": "^23.1.0",
-    "@ckeditor/ckeditor5-theme-lark": "^23.0.0"
+    "@ckeditor/ckeditor5-theme-lark": "^23.0.0",
+    "@ckeditor/ckeditor5-widget": "^23.1.0"
   },
   "peerDependencies": {
     "react": "^16.13.1",
