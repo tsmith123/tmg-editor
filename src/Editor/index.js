@@ -20,6 +20,9 @@ import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js'
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters.js'
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice'
 
+// Authoring 2.0 Plugins
+import VideoPlugin from '../plugins/video'
+
 const Editor = ({ placeholder, data, onInit, onChange, videoRenderer }) => {
   const config = {
     placeholder,
@@ -38,7 +41,8 @@ const Editor = ({ placeholder, data, onInit, onChange, videoRenderer }) => {
       RemoveFormat,
       Strikethrough,
       SpecialCharacters,
-      Superscript
+      Superscript,
+      VideoPlugin
     ],
     heading: {
       options: [
@@ -60,7 +64,9 @@ const Editor = ({ placeholder, data, onInit, onChange, videoRenderer }) => {
         }
       }
     },
-    video: videoRenderer
+    video: {
+      renderer: videoRenderer
+    }
   }
 
   const handleOnInit = editor => {

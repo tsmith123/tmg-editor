@@ -31,73 +31,74 @@ export default class VideoPlugin extends Plugin {
     })
   }
 
-  // _defineConverters () {
-  //   const editor = this.editor
-  //   const conversion = editor.conversion
-  //   const renderProduct = editor.config.get('products').productRenderer
+  _defineConverters () {
+    const editor = this.editor
+    const conversion = editor.conversion
+    const renderVideo = editor.config.get('video').renderer
 
-  //   // <productPreview> converters ((data) view → model)
-  //   conversion.for('upcast').elementToElement({
-  //     view: {
-  //       name: 'section',
-  //       classes: 'product'
-  //     },
-  //     model: (viewElement, { writer: modelWriter }) => {
-  //       // Read the "data-id" attribute from the view and set it as the "id" in the model.
-  //       return modelWriter.createElement('productPreview', {
-  //         id: parseInt(viewElement.getAttribute('data-id'))
-  //       })
-  //     }
-  //   })
+    // <productPreview> converters ((data) view → model)
+    conversion.for('upcast').elementToElement({
+      view: {
+        name: 'section',
+        classes: 'video'
+      },
+      model: (viewElement, { writer: modelWriter }) => {
+        // Read the "data-id" attribute from the view and set it as the "id" in the model.
+        return modelWriter.createElement('video', {
+          // id: parseInt(viewElement.getAttribute('data-id'))
+        })
+      }
+    })
 
-  //   // <productPreview> converters (model → data view)
-  //   conversion.for('dataDowncast').elementToElement({
-  //     model: 'productPreview',
-  //     view: (modelElement, { writer: viewWriter }) => {
-  //       // In the data view, the model <productPreview> corresponds to:
-  //       //
-  //       // <section class="product" data-id="..."></section>
-  //       return viewWriter.createEmptyElement('section', {
-  //         class: 'product',
-  //         'data-id': modelElement.getAttribute('id')
-  //       })
-  //     }
-  //   })
+    // <productPreview> converters (model → data view)
+    conversion.for('dataDowncast').elementToElement({
+      model: 'video',
+      view: (modelElement, { writer: viewWriter }) => {
+        // In the data view, the model <productPreview> corresponds to:
+        //
+        // <section class="product" data-id="..."></section>
+        return viewWriter.createEmptyElement('section', {
+          class: 'video'
+          // 'data-id': modelElement.getAttribute('id')
+        })
+      }
+    })
 
-  //   // <productPreview> converters (model → editing view)
-  //   conversion.for('editingDowncast').elementToElement({
-  //     model: 'productPreview',
-  //     view: (modelElement, { writer: viewWriter }) => {
-  //       // In the editing view, the model <productPreview> corresponds to:
-  //       //
-  //       // <section class="product" data-id="...">
-  //       //     <div class="product__react-wrapper">
-  //       //         <ProductPreview /> (React component)
-  //       //     </div>
-  //       // </section>
-  //       const id = modelElement.getAttribute('id')
+    // <productPreview> converters (model → editing view)
+    conversion.for('editingDowncast').elementToElement({
+      model: 'video',
+      view: (modelElement, { writer: viewWriter }) => {
+        // In the editing view, the model <productPreview> corresponds to:
+        //
+        // <section class="product" data-id="...">
+        //     <div class="product__react-wrapper">
+        //         <ProductPreview /> (React component)
+        //     </div>
+        // </section>
 
-  //       // The outermost <section class="product" data-id="..."></section> element.
-  //       const section = viewWriter.createContainerElement('section', {
-  //         class: 'product',
-  //         'data-id': id
-  //       })
+        // const id = modelElement.getAttribute('id')
 
-  //       // The inner <div class="product__react-wrapper"></div> element.
-  //       // This element will host a React <ProductPreview /> component.
-  //       const reactWrapper = viewWriter.createRawElement('div', {
-  //         class: 'product__react-wrapper'
-  //       }, function (domElement) {
-  //         // This the place where React renders the actual product preview hosted
-  //         // by a UIElement in the view. You are using a function (renderer) passed as
-  //         // editor.config.products#productRenderer.
-  //         renderProduct(id, domElement)
-  //       })
+        // The outermost <section class="product" data-id="..."></section> element.
+        const section = viewWriter.createContainerElement('section', {
+          class: 'video'
+          // 'data-id': id
+        })
 
-  //       viewWriter.insert(viewWriter.createPositionAt(section, 0), reactWrapper)
+        // The inner <div class="product__react-wrapper"></div> element.
+        // This element will host a React <ProductPreview /> component.
+        const reactWrapper = viewWriter.createRawElement('div', {
+          class: 'video__react-wrapper'
+        }, function (domElement) {
+          // This the place where React renders the actual product preview hosted
+          // by a UIElement in the view. You are using a function (renderer) passed as
+          // editor.config.products#productRenderer.
+          renderVideo(domElement)
+        })
 
-  //       return toWidget(section, viewWriter, { label: 'product preview widget' })
-  //     }
-  //   })
-  // }
+        viewWriter.insert(viewWriter.createPositionAt(section, 0), reactWrapper)
+
+        return toWidget(section, viewWriter, { label: 'video widget' })
+      }
+    })
+  }
 }
