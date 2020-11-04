@@ -1,9 +1,10 @@
 import React from 'react'
 
+// CKEditor 5
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor'
 
-// /* CKEditor Plugins */
+// CKEditor 5 Plugins
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials'
 import Heading from '@ckeditor/ckeditor5-heading/src/heading'
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph'
@@ -47,6 +48,7 @@ const Editor = ({ placeholder, data, onInit, onChange, videoRenderer }) => {
       ]
     },
     link: {
+      defaultProtocol: 'http://',
       decorators: {
         addTargetToExternalLinks: {
           mode: 'manual',
