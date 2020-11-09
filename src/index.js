@@ -50,7 +50,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, videoRenderer }) =
       options: [
         { model: 'paragraph', title: 'Normal', class: 'ck-heading_paragraph' },
         { model: 'heading3', view: 'h3', title: 'Large', class: 'ck-heading_heading3' },
-        { model: 'heading4', view: 'h4', title: 'Medium', class: 'ck-heading_heading4' }
+        { model: 'heading4', view: 'h4', title: 'Medium', class: 'ck-heading_heading4' },
+        { model: 'heading5', view: 'h5', title: 'Medium + Line', class: 'ck-heading_heading5' }
       ]
     },
     link: {
