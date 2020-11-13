@@ -22,7 +22,7 @@ import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specia
 import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials'
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice'
 
-// Authoring 2.0 Plugins
+// Our Plugins
 import MediaPlugin from './plugins/media'
 
 export const Editor = ({ placeholder, data, onInit, onChange, media }) => {

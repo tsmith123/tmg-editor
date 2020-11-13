@@ -25,9 +25,7 @@ export default class MediaPlugin extends Plugin {
       // Allow in places where other blocks are allowed (e.g. directly in the root).
       allowWhere: '$block',
 
-      // Each product preview has an ID. A unique ID tells the application which
-      // product it represents and makes it possible to render it inside a widget.
-      allowAttributes: ['id']
+      allowAttributes: ['id', 'src']
     })
   }
 
@@ -43,9 +41,10 @@ export default class MediaPlugin extends Plugin {
         classes: 'media'
       },
       model: (viewElement, { writer: modelWriter }) => {
-        // Read the "data-id" attribute from the view and set it as the "id" in the model.
+        // Read the "data-xxx" attributes from the view and set them as "xxx" in the model.
         return modelWriter.createElement('media', {
-          // id: parseInt(viewElement.getAttribute('data-id'))
+          id: parseInt(viewElement.getAttribute('data-id')),
+          src: viewElement.getAttribute('data-src')
         })
       }
     })
@@ -54,12 +53,11 @@ export default class MediaPlugin extends Plugin {
     conversion.for('dataDowncast').elementToElement({
       model: 'media',
       view: (modelElement, { writer: viewWriter }) => {
-        // In the data view, the model <productPreview> corresponds to:
-        //
-        // <section class="product" data-id="..."></section>
+        // <section class="media" data-id="..."></section>
         return viewWriter.createEmptyElement('section', {
-          class: 'media'
-          // 'data-id': modelElement.getAttribute('id')
+          class: 'media',
+          'data-id': modelElement.getAttribute('id'),
+          'data-src': modelElement.getAttribute('src')
         })
       }
     })
@@ -70,18 +68,20 @@ export default class MediaPlugin extends Plugin {
       view: (modelElement, { writer: viewWriter }) => {
         // In the editing view, the model <productPreview> corresponds to:
         //
-        // <section class="product" data-id="...">
+        // <section class="media" data-id="..." data-src="...">
         //     <div class="product__react-wrapper">
-        //         <ProductPreview /> (React component)
+        //         <ReactComponent />
         //     </div>
         // </section>
 
-        // const id = modelElement.getAttribute('id')
+        const id = modelElement.getAttribute('id')
+        const src = modelElement.getAttribute('src')
 
         // The outermost <section class="product" data-id="..."></section> element.
         const section = viewWriter.createContainerElement('section', {
-          class: 'media'
-          // 'data-id': id
+          class: 'media',
+          'data-id': id,
+          'data-src': src
         })
 
         // The inner <div class="product__react-wrapper"></div> element.
