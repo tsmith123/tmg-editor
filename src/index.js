@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 // CKEditor 5
 import CKEditor from '@ckeditor/ckeditor5-react'
@@ -22,9 +23,9 @@ import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice'
 
 // Authoring 2.0 Plugins
-import VideoPlugin from './plugins/video'
+import MediaPlugin from './plugins/media'
 
-export const Editor = ({ placeholder, data, onInit, onChange, videoRenderer }) => {
+export const Editor = ({ placeholder, data, onInit, onChange, media }) => {
   const config = {
     placeholder,
     toolbar: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo'],
@@ -37,14 +38,14 @@ export const Editor = ({ placeholder, data, onInit, onChange, videoRenderer }) =
       Italic,
       Link,
       List,
+      MediaPlugin,
       PasteFromOffice,
       Paragraph,
       RemoveFormat,
       Strikethrough,
       SpecialCharacters,
       SpecialCharactersEssentials,
-      Superscript,
-      VideoPlugin
+      Superscript
     ],
     heading: {
       options: [
@@ -67,8 +68,10 @@ export const Editor = ({ placeholder, data, onInit, onChange, videoRenderer }) =
         }
       }
     },
-    video: {
-      renderer: videoRenderer
+    media: {
+      renderer: domElement => {
+        ReactDOM.render(media, domElement)
+      }
     }
   }
 

@@ -1,9 +1,9 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin'
 import { toWidget } from '@ckeditor/ckeditor5-widget/src/utils'
 import Widget from '@ckeditor/ckeditor5-widget/src/widget'
-import VideoCommand from '../../commands/video'
+import MediaCommand from '../../commands/media'
 
-export default class VideoPlugin extends Plugin {
+export default class MediaPlugin extends Plugin {
   static get requires () {
     return [Widget]
   }
@@ -12,13 +12,13 @@ export default class VideoPlugin extends Plugin {
     this._defineSchema()
     this._defineConverters()
 
-    this.editor.commands.add('insertVideo', new VideoCommand(this.editor))
+    this.editor.commands.add('insertMedia', new MediaCommand(this.editor))
   }
 
   _defineSchema () {
     const schema = this.editor.model.schema
 
-    schema.register('video', {
+    schema.register('media', {
       // Behaves like a self-contained object (e.g. an image).
       isObject: true,
 
@@ -34,17 +34,17 @@ export default class VideoPlugin extends Plugin {
   _defineConverters () {
     const editor = this.editor
     const conversion = editor.conversion
-    const renderVideo = editor.config.get('video').renderer
+    const renderMedia = editor.config.get('media').renderer
 
     // <productPreview> converters ((data) view → model)
     conversion.for('upcast').elementToElement({
       view: {
         name: 'section',
-        classes: 'video'
+        classes: 'media'
       },
       model: (viewElement, { writer: modelWriter }) => {
         // Read the "data-id" attribute from the view and set it as the "id" in the model.
-        return modelWriter.createElement('video', {
+        return modelWriter.createElement('media', {
           // id: parseInt(viewElement.getAttribute('data-id'))
         })
       }
@@ -52,13 +52,13 @@ export default class VideoPlugin extends Plugin {
 
     // <productPreview> converters (model → data view)
     conversion.for('dataDowncast').elementToElement({
-      model: 'video',
+      model: 'media',
       view: (modelElement, { writer: viewWriter }) => {
         // In the data view, the model <productPreview> corresponds to:
         //
         // <section class="product" data-id="..."></section>
         return viewWriter.createEmptyElement('section', {
-          class: 'video'
+          class: 'media'
           // 'data-id': modelElement.getAttribute('id')
         })
       }
@@ -66,7 +66,7 @@ export default class VideoPlugin extends Plugin {
 
     // <productPreview> converters (model → editing view)
     conversion.for('editingDowncast').elementToElement({
-      model: 'video',
+      model: 'media',
       view: (modelElement, { writer: viewWriter }) => {
         // In the editing view, the model <productPreview> corresponds to:
         //
@@ -80,24 +80,24 @@ export default class VideoPlugin extends Plugin {
 
         // The outermost <section class="product" data-id="..."></section> element.
         const section = viewWriter.createContainerElement('section', {
-          class: 'video'
+          class: 'media'
           // 'data-id': id
         })
 
         // The inner <div class="product__react-wrapper"></div> element.
         // This element will host a React <ProductPreview /> component.
         const reactWrapper = viewWriter.createRawElement('div', {
-          class: 'video__react-wrapper'
+          class: 'media__react-wrapper'
         }, function (domElement) {
           // This the place where React renders the actual product preview hosted
           // by a UIElement in the view. You are using a function (renderer) passed as
           // editor.config.products#productRenderer.
-          renderVideo(domElement)
+          renderMedia(domElement)
         })
 
         viewWriter.insert(viewWriter.createPositionAt(section, 0), reactWrapper)
 
-        return toWidget(section, viewWriter, { label: 'video widget' })
+        return toWidget(section, viewWriter, { label: 'media widget' })
       }
     })
   }
