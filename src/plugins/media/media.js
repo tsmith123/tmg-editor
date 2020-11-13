@@ -92,7 +92,7 @@ export default class MediaPlugin extends Plugin {
           // This the place where React renders the actual product preview hosted
           // by a UIElement in the view. You are using a function (renderer) passed as
           // editor.config.products#productRenderer.
-          renderMedia(domElement)
+          renderMedia({ id, src }, domElement)
         })
 
         viewWriter.insert(viewWriter.createPositionAt(section, 0), reactWrapper)
