@@ -70,6 +70,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, media: Component }
     },
     media: {
       renderer: (data, domElement) => {
+        console.log('Data', data)
+        console.log('Component', Component)
         ReactDOM.render(<Component {...data} />, domElement)
       }
     }
