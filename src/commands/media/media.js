@@ -1,8 +1,12 @@
 import Command from '@ckeditor/ckeditor5-core/src/command'
 
 export default class MediaCommand extends Command {
-  execute (data) {
+  execute (data, insertAtTop) {
     this.editor.model.change(writer => {
+      if (insertAtTop) {
+        writer.setSelection(writer.createPositionAt(this.editor.model.document.getRoot(), 0))
+      }
+
       this.editor.model.insertContent(writer.createElement('media', data))
     })
   }

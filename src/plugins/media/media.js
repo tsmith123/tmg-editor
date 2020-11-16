@@ -25,7 +25,7 @@ export default class MediaPlugin extends Plugin {
       // Allow in places where other blocks are allowed (e.g. directly in the root).
       allowWhere: '$block',
 
-      allowAttributes: ['id', 'src']
+      allowAttributes: ['id', 'src', 'title']
     })
   }
 
@@ -44,7 +44,8 @@ export default class MediaPlugin extends Plugin {
         // Read the "data-xxx" attributes from the view and set them as "xxx" in the model.
         return modelWriter.createElement('media', {
           id: parseInt(viewElement.getAttribute('data-id')),
-          src: viewElement.getAttribute('data-src')
+          src: viewElement.getAttribute('data-src'),
+          title: viewElement.getAttribute('data-title')
         })
       }
     })
@@ -57,7 +58,8 @@ export default class MediaPlugin extends Plugin {
         return viewWriter.createEmptyElement('section', {
           class: 'media',
           'data-id': modelElement.getAttribute('id'),
-          'data-src': modelElement.getAttribute('src')
+          'data-src': modelElement.getAttribute('src'),
+          'data-title': modelElement.getAttribute('title')
         })
       }
     })
@@ -69,19 +71,21 @@ export default class MediaPlugin extends Plugin {
         // In the editing view, the model <productPreview> corresponds to:
         //
         // <section class="media" data-id="..." data-src="...">
-        //     <div class="product__react-wrapper">
+        //     <div class="media__react-wrapper">
         //         <ReactComponent />
         //     </div>
         // </section>
 
         const id = modelElement.getAttribute('id')
         const src = modelElement.getAttribute('src')
+        const title = modelElement.getAttribute('title')
 
         // The outermost <section class="product" data-id="..."></section> element.
         const section = viewWriter.createContainerElement('section', {
           class: 'media',
           'data-id': id,
-          'data-src': src
+          'data-src': src,
+          'data-title': title
         })
 
         // The inner <div class="product__react-wrapper"></div> element.
@@ -89,10 +93,7 @@ export default class MediaPlugin extends Plugin {
         const reactWrapper = viewWriter.createRawElement('div', {
           class: 'media__react-wrapper'
         }, function (domElement) {
-          // This the place where React renders the actual product preview hosted
-          // by a UIElement in the view. You are using a function (renderer) passed as
-          // editor.config.products#productRenderer.
-          renderMedia({ id, src }, domElement)
+          renderMedia({ id, src, title }, domElement)
         })
 
         viewWriter.insert(viewWriter.createPositionAt(section, 0), reactWrapper)
