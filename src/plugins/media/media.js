@@ -43,7 +43,7 @@ export default class MediaPlugin extends Plugin {
       model: (viewElement, { writer: modelWriter }) => {
         // Read the "data-xxx" attributes from the view and set them as "xxx" in the model.
         return modelWriter.createElement('media', {
-          id: parseInt(viewElement.getAttribute('data-id')),
+          id: viewElement.getAttribute('data-id'),
           src: viewElement.getAttribute('data-src'),
           title: viewElement.getAttribute('data-title')
         })

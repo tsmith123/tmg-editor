@@ -25,7 +25,7 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 // Our Plugins
 import MediaPlugin from './plugins/media'
 
-export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
+export const Editor = ({ placeholder, data, onInit, onChange, plugin: Plugin }) => {
   const config = {
     placeholder,
     toolbar: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo'],
@@ -71,17 +71,13 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
     media: {
       renderer: (props, domElement) => {
         const { id } = props
-        console.log('ID', id)
-        const Component = plugin.view
-
-        const { onSwap, onReplace } = plugin.props
 
         const handlers = {
-          onSwap: type => onSwap(id, type),
-          onReplace: type => onReplace(id, type)
+          onSwap: () => onChange(id, 'BODY.SWAP'),
+          onReplace: () => onChange(id, 'BODY.REPLACE')
         }
 
-        ReactDOM.render(<Component {...props} {...handlers} />, domElement)
+        ReactDOM.render(<Plugin {...props} {...handlers} />, domElement)
       }
     }
   }
