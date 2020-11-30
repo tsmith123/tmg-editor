@@ -70,8 +70,9 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
     },
     media: {
       renderer: (props, domElement) => {
-        const Plugin = plugin // handles images and videos
-        ReactDOM.render(<Plugin {...props} />, domElement)
+        const Component = plugin.view
+        const handlers = plugin.props
+        ReactDOM.render(<Component {...props} {...handlers} />, domElement)
       }
     }
   }
