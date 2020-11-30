@@ -76,8 +76,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
         const { onSwap, onReplace } = plugin.props
 
         const handlers = {
-          onSwap: type => onSwap(id, type),
-          onReplace: type => onReplace(id, type)
+          onSwap: () => onSwap(id),
+          onReplace: () => onReplace(id)
         }
 
         ReactDOM.render(<Component {...props} {...handlers} />, domElement)
@@ -91,7 +91,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
 
   const handleOnChange = (ev, editor) => {
     const data = editor.getData()
-    onChange && onChange(data)
+    onChange && onChange(editor, data)
   }
 
   return (
