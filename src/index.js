@@ -76,8 +76,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
         const { onSwap, onReplace } = plugin.props
 
         const handlers = {
-          onSwap: () => onSwap(id),
-          onReplace: () => onReplace(id)
+          onSwap: type => onSwap(id, type),
+          onReplace: type => onReplace(id, type)
         }
 
         ReactDOM.render(<Component {...props} {...handlers} />, domElement)
