@@ -25,7 +25,7 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 // Our Plugins
 import MediaPlugin from './plugins/media'
 
-export const Editor = ({ placeholder, data, onInit, onChange, plugins }) => {
+export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   const config = {
     placeholder,
     toolbar: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo'],
@@ -69,9 +69,9 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugins }) => {
       }
     },
     media: {
-      renderer: (data, domElement) => {
-        const MediaComponent = plugins.media // handles images and videos
-        ReactDOM.render(<MediaComponent {...data} />, domElement)
+      renderer: (props, domElement) => {
+        const Plugin = plugin // handles images and videos
+        ReactDOM.render(<Plugin {...props} />, domElement)
       }
     }
   }
