@@ -1,6 +1,6 @@
 {
   "name": "tmg-editor",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "CKEditor Wrapper",
   "main": "dist/index.js",
   "scripts": {
