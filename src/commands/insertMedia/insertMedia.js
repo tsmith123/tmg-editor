@@ -1,6 +1,6 @@
 import Command from '@ckeditor/ckeditor5-core/src/command'
 
-export default class MediaCommand extends Command {
+export default class InsertMediaCommand extends Command {
   execute (data, insertAtTop) {
     this.editor.model.change(writer => {
       if (insertAtTop) {
