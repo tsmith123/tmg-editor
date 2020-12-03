@@ -2,7 +2,6 @@ import Plugin from '@ckeditor/ckeditor5-core/src/plugin'
 import { toWidget } from '@ckeditor/ckeditor5-widget/src/utils'
 import Widget from '@ckeditor/ckeditor5-widget/src/widget'
 import InsertMediaCommand from '../../commands/insertMedia'
-import DeleteMediaCommand from '../../commands/deleteMedia'
 
 export default class MediaPlugin extends Plugin {
   static get requires () {
@@ -14,7 +13,6 @@ export default class MediaPlugin extends Plugin {
     this._defineConverters()
 
     this.editor.commands.add('insertMedia', new InsertMediaCommand(this.editor))
-    this.editor.commands.add('deleteMedia', new DeleteMediaCommand(this.editor))
   }
 
   _defineSchema () {
