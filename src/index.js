@@ -24,11 +24,12 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 
 // Our Plugins
 import MediaPlugin from './plugins/media'
+import Test from './plugins/test'
 
 export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   const config = {
     placeholder,
-    toolbar: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo'],
+    toolbar: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|', 'test'],
     plugins: [
       AutoLink,
       BlockQuote,
@@ -45,7 +46,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
       Strikethrough,
       SpecialCharacters,
       SpecialCharactersEssentials,
-      Superscript
+      Superscript,
+      Test
     ],
     heading: {
       options: [
@@ -86,6 +88,19 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   }
 
   const handleOnInit = editor => {
+    editor.addCommand('test', {
+      exec: function () {
+        console.log('Editor Hit')
+      }
+    })
+
+    editor.ui.addButton('test', {
+      label: 'Insert Video',
+      command: 'test',
+      toolbar: '',
+      icon: './icons/image.svg'
+    })
+
     onInit && onInit(editor)
   }
 
