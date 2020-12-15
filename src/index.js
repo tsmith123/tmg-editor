@@ -32,7 +32,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick })
     placeholder,
     toolbar: {
       items: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'image', 'video', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|'],
-      viewportTopOffset: 60
+      viewportTopOffset: 130
     },
     plugins: [
       AutoLink,
@@ -90,7 +90,6 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick })
         ReactDOM.render(<Component {...props} {...handlers} />, domElement)
       },
       handler: type => {
-        console.log('Handler', type)
         onClick && onClick(type, { target: 'body' })
       }
     }
