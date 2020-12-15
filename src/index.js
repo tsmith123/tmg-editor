@@ -27,7 +27,7 @@ import MediaPlugin from './plugins/media'
 
 import Test from './plugins/test'
 
-export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
+export const Editor = ({ placeholder, data, onInit, onChange, plugin, onVideoClick }) => {
   const config = {
     placeholder,
     toolbar: {
@@ -89,7 +89,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
         ReactDOM.render(<Component {...props} {...handlers} />, domElement)
       },
       showVideoBrowser () {
-        console.log('Show video browser...')
+        onVideoClick && onVideoClick()
       }
     }
   }
