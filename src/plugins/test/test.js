@@ -7,7 +7,7 @@ export default class Test extends Plugin {
     console.log('Test plugin was initialized')
   }
 
-  ready (param) {
+  build (param) {
     console.log('Param', param)
 
     const editor = this.editor

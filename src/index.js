@@ -24,9 +24,10 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 
 // Our Plugins
 import MediaPlugin from './plugins/media'
-import TestPlugin from './plugins/test'
 
-const Test = TestPlugin.ready('Param 1')
+import TestPlugin from './plugins/test'
+const TestPluginInstance = new TestPlugin()
+const Test = TestPluginInstance.build('Param 1')
 
 export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   const config = {
