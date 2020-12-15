@@ -89,7 +89,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick })
 
         ReactDOM.render(<Component {...props} {...handlers} />, domElement)
       },
-      handler (type) {
+      handler: (type) => {
         onClick && onClick(type, { target: 'body' })
       }
     }
