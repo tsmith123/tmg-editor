@@ -3,10 +3,8 @@ import icon from '@ckeditor/ckeditor5-core/theme/icons/image.svg'
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview'
 
 export default class Test extends Plugin {
-  constructor (editor, ...args) {
-    // super()
-    console.log('Editor', editor)
-    this.editor = editor
+  constructor () {
+    this.handler = () => console.log('Handler 1')
   }
 
   init (param) {
@@ -25,10 +23,14 @@ export default class Test extends Plugin {
       })
 
       view.on('execute', () => {
-        console.log('HIT')
+        this.handler.apply()
       })
 
       return view
     })
+  }
+
+  loadHandler (handler) {
+    this.handler = handler
   }
 }
