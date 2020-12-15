@@ -17,7 +17,7 @@ export default class Image extends Plugin {
 
       view.on('execute', () => {
         const handler = editor.config.get('media').handler
-        handler.apply('image')
+        handler && handler('image')
       })
 
       return view

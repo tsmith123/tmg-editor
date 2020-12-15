@@ -17,7 +17,7 @@ export default class Video extends Plugin {
 
       view.on('execute', () => {
         const handler = editor.config.get('media').handler
-        handler.call('video')
+        handler && handler('video')
       })
 
       return view
