@@ -86,6 +86,19 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   }
 
   const handleOnInit = editor => {
+    editor.addCommand('test', {
+      exec: function () {
+        console.log('Editor Hit')
+      }
+    })
+
+    editor.ui.addButton('test', {
+      label: 'Insert Video',
+      command: 'test'
+      // toolbar: 'others',
+      // icon: '/Content/images/convert.svg'
+    })
+
     onInit && onInit(editor)
   }
 
