@@ -26,10 +26,6 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 import MediaPlugin from './plugins/media'
 
 import Test from './plugins/test'
-console.log(Test)
-
-Test.loadHandler(() => console.log('Handler 2'))
-console.log(Test)
 
 export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   const config = {
@@ -91,6 +87,9 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
         }
 
         ReactDOM.render(<Component {...props} {...handlers} />, domElement)
+      },
+      showVideoBrowser () {
+        console.log('Show video browser...')
       }
     }
   }
