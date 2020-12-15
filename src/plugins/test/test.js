@@ -30,7 +30,7 @@ export default class Test extends Plugin {
     })
   }
 
-  loadHandler (handler) {
+  static loadHandler (handler) {
     this.handler = handler
   }
 }
