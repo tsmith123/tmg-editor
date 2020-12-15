@@ -27,7 +27,10 @@ import MediaPlugin from './plugins/media'
 
 import TestPlugin from './plugins/test'
 const TestPluginInstance = new TestPlugin('Testing')
+console.log('Instance', TestPluginInstance)
+
 const Test = TestPluginInstance.init('Param 1')
+console.log('Init', Test)
 
 export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   const config = {

@@ -5,13 +5,14 @@ import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview'
 export default class Test extends Plugin {
   constructor (editor, ...args) {
     // super()
-    console.log('Args', args)
+    console.log('Editor', editor)
     this.editor = editor
   }
 
   init (param) {
     console.log('Test plugin was initialized')
     console.log(param)
+    console.log(this)
     const editor = this.editor
 
     editor.ui.componentFactory.add('test', () => {
