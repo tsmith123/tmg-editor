@@ -24,14 +24,14 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 
 // Our Plugins
 import MediaPlugin from './plugins/media'
+import Image from './plugins/image'
+import Video from './plugins/video'
 
-import Test from './plugins/test'
-
-export const Editor = ({ placeholder, data, onInit, onChange, plugin, onVideoClick }) => {
+export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick }) => {
   const config = {
     placeholder,
     toolbar: {
-      items: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|', 'test'],
+      items: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'image', 'video', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|'],
       viewportTopOffset: 60
     },
     plugins: [
@@ -40,6 +40,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onVideoCli
       Bold,
       Essentials,
       Heading,
+      Image,
       Italic,
       Link,
       List,
@@ -51,7 +52,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onVideoCli
       SpecialCharacters,
       SpecialCharactersEssentials,
       Superscript,
-      Test
+      Video
     ],
     heading: {
       options: [
@@ -88,8 +89,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onVideoCli
 
         ReactDOM.render(<Component {...props} {...handlers} />, domElement)
       },
-      showVideoBrowser () {
-        onVideoClick && onVideoClick()
+      handler (type) {
+        onClick && onClick(type)
       }
     }
   }
