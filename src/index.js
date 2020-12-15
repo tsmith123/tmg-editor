@@ -25,12 +25,17 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 // Our Plugins
 import MediaPlugin from './plugins/media'
 
-// import Test from './plugins/test'
+import TestPlugin from './plugins/test'
+const TestPluginInstance = new TestPlugin('Testing')
+const Test = TestPluginInstance.init('Param 1')
 
 export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   const config = {
     placeholder,
-    toolbar: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|'],
+    toolbar: {
+      items: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|', 'test'],
+      viewportTopOffset: 60
+    },
     plugins: [
       AutoLink,
       BlockQuote,
@@ -47,7 +52,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
       Strikethrough,
       SpecialCharacters,
       SpecialCharactersEssentials,
-      Superscript
+      Superscript,
+      Test
     ],
     heading: {
       options: [

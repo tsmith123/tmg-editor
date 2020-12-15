@@ -3,13 +3,15 @@ import icon from '@ckeditor/ckeditor5-core/theme/icons/image.svg'
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview'
 
 export default class Test extends Plugin {
-  init () {
-    console.log('Test plugin was initialized')
+  constructor (editor, ...args) {
+    // super()
+    console.log('Args', args)
+    this.editor = editor
   }
 
-  build (param) {
-    console.log('Param', param)
-
+  init (param) {
+    console.log('Test plugin was initialized')
+    console.log(param)
     const editor = this.editor
 
     editor.ui.componentFactory.add('test', () => {
@@ -21,7 +23,6 @@ export default class Test extends Plugin {
         tooltip: true
       })
 
-      // Callback executed once the image is clicked.
       view.on('execute', () => {
         console.log('HIT')
       })
