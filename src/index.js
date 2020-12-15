@@ -24,7 +24,9 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 
 // Our Plugins
 import MediaPlugin from './plugins/media'
-import Test from './plugins/test'
+import TestPlugin from './plugins/test'
+
+const Test = TestPlugin.ready('Param 1')
 
 export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   const config = {
@@ -88,19 +90,6 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
   }
 
   const handleOnInit = editor => {
-    editor.addCommand('test', {
-      exec: function () {
-        console.log('Editor Hit')
-      }
-    })
-
-    editor.ui.addButton('test', {
-      label: 'Insert Video',
-      command: 'test',
-      toolbar: '',
-      icon: './icons/image.svg'
-    })
-
     onInit && onInit(editor)
   }
 

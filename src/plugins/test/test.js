@@ -3,9 +3,12 @@ import icon from '@ckeditor/ckeditor5-core/theme/icons/image.svg'
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview'
 
 export default class Test extends Plugin {
-  init (param) {
-    console.log('Param', param)
+  init () {
     console.log('Test plugin was initialized')
+  }
+
+  ready (param) {
+    console.log('Param', param)
 
     const editor = this.editor
 
