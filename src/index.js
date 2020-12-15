@@ -101,7 +101,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick })
 
   const handleOnChange = (ev, editor) => {
     const data = editor.getData()
-    onChange && onChange(data)
+    onChange && onChange({ data })
   }
 
   return (
