@@ -94,9 +94,9 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin }) => {
 
     editor.ui.addButton('test', {
       label: 'Insert Video',
-      command: 'test'
-      // toolbar: 'others',
-      // icon: '/Content/images/convert.svg'
+      command: 'test',
+      toolbar: '',
+      icon: './icons/image.svg'
     })
 
     onInit && onInit(editor)
