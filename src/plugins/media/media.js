@@ -25,7 +25,7 @@ export default class MediaPlugin extends Plugin {
       // Allow in places where other blocks are allowed (e.g. directly in the root).
       allowWhere: '$block',
 
-      allowAttributes: ['id', 'src', 'title']
+      allowAttributes: ['id', 'src', 'title', 'type']
     })
   }
 
@@ -45,7 +45,8 @@ export default class MediaPlugin extends Plugin {
         return modelWriter.createElement('media', {
           id: viewElement.getAttribute('data-id'),
           src: viewElement.getAttribute('data-src'),
-          title: viewElement.getAttribute('data-title')
+          title: viewElement.getAttribute('data-title'),
+          type: viewElement.getAttribute('data-type')
         })
       }
     })
@@ -59,7 +60,8 @@ export default class MediaPlugin extends Plugin {
           class: 'media',
           'data-id': modelElement.getAttribute('id'),
           'data-src': modelElement.getAttribute('src'),
-          'data-title': modelElement.getAttribute('title')
+          'data-title': modelElement.getAttribute('title'),
+          'data-type': modelElement.getAttribute('type')
         })
       }
     })
@@ -68,24 +70,18 @@ export default class MediaPlugin extends Plugin {
     conversion.for('editingDowncast').elementToElement({
       model: 'media',
       view: (modelElement, { writer: viewWriter }) => {
-        // In the editing view, the model <productPreview> corresponds to:
-        //
-        // <section class="media" data-id="..." data-src="...">
-        //     <div class="media__react-wrapper">
-        //         <ReactComponent />
-        //     </div>
-        // </section>
-
         const id = modelElement.getAttribute('id')
         const src = modelElement.getAttribute('src')
         const title = modelElement.getAttribute('title')
+        const type = modelElement.getAttribute('type')
 
         // The outermost <section class="product" data-id="..."></section> element.
         const section = viewWriter.createContainerElement('section', {
           class: 'media',
           'data-id': id,
           'data-src': src,
-          'data-title': title
+          'data-title': title,
+          'data-type': type
         })
 
         // The inner <div class="product__react-wrapper"></div> element.
@@ -93,7 +89,7 @@ export default class MediaPlugin extends Plugin {
         const reactWrapper = viewWriter.createRawElement('div', {
           class: 'media__react-wrapper'
         }, function (domElement) {
-          renderMedia({ id, src, title }, domElement)
+          renderMedia({ id, src, title, type }, domElement)
         })
 
         viewWriter.insert(viewWriter.createPositionAt(section, 0), reactWrapper)
