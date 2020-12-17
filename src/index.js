@@ -26,12 +26,13 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 import MediaPlugin from './plugins/media'
 import Image from './plugins/image'
 import Video from './plugins/video'
+import Html from './plugins/html'
 
 export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick }) => {
   const config = {
     placeholder,
     toolbar: {
-      items: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'image', 'video', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|'],
+      items: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'image', 'video', 'html', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|'],
       viewportTopOffset: 130
     },
     plugins: [
@@ -40,6 +41,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick })
       Bold,
       Essentials,
       Heading,
+      Html,
       Image,
       Italic,
       Link,
