@@ -1,5 +1,5 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin'
-import icon from '../../icons/image.svg'
+import icon from '../../icons/html.svg'
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview'
 
 export default class Html extends Plugin {
