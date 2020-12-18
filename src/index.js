@@ -23,7 +23,8 @@ import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice'
 
 // Our Plugins
-import MediaPlugin from './plugins/media'
+import Media from './plugins/media'
+import Frame from './plugins/frame'
 import Image from './plugins/image'
 import Video from './plugins/video'
 import Html from './plugins/html'
@@ -40,13 +41,14 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick })
       BlockQuote,
       Bold,
       Essentials,
+      Frame,
       Heading,
       Html,
       Image,
       Italic,
       Link,
       List,
-      MediaPlugin,
+      Media,
       PasteFromOffice,
       Paragraph,
       RemoveFormat,
@@ -94,6 +96,20 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick })
       },
       handler: type => {
         onClick && onClick(type, { target: 'body' })
+      }
+    },
+    frame: {
+      renderer: (props, domElement) => {
+        const { type } = props
+        const Component = plugin.view
+
+        const { onEdit } = plugin.props
+
+        const handlers = {
+          onEdit: () => onEdit(type, { target: 'body' })
+        }
+
+        ReactDOM.render(<Component {...props} {...handlers} />, domElement)
       }
     }
   }
