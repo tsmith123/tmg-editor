@@ -29,7 +29,7 @@ import Image from './plugins/image'
 import Video from './plugins/video'
 import Html from './plugins/html'
 
-export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick }) => {
+export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, handlers }) => {
   const config = {
     placeholder,
     toolbar: {
@@ -82,17 +82,17 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick })
     media: {
       renderer: (props, domElement) => {
         const { id, type } = props
-        const Component = plugin.view
+        const Component = plugins.media
 
-        const { onSwap, onReplace, onEdit } = plugin.props
+        const { onSwap, onReplace, onEdit } = handlers
 
-        const handlers = {
+        const methods = {
           onSwap: () => onSwap({ id }, 'swap'),
           onReplace: () => onReplace({ id }, 'replace'),
           onEdit: () => onEdit(type, { target: 'body' })
         }
 
-        ReactDOM.render(<Component {...props} {...handlers} />, domElement)
+        ReactDOM.render(<Component {...props} {...methods} />, domElement)
       },
       handler: type => {
         onClick && onClick(type, { target: 'body' })
@@ -100,16 +100,9 @@ export const Editor = ({ placeholder, data, onInit, onChange, plugin, onClick })
     },
     frame: {
       renderer: (props, domElement) => {
-        const { type } = props
-        const Component = plugin.view
+        const Component = plugins.frame
 
-        const { onEdit } = plugin.props
-
-        const handlers = {
-          onEdit: () => onEdit(type, { target: 'body' })
-        }
-
-        ReactDOM.render(<Component {...props} {...handlers} />, domElement)
+        ReactDOM.render(<Component {...props} />, domElement)
       }
     }
   }
