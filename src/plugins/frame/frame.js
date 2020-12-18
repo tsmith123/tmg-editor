@@ -23,7 +23,7 @@ export default class FramePlugin extends Plugin {
 
       allowWhere: '$block',
 
-      allowAttributes: ['src', 'type']
+      allowAttributes: ['html', 'type']
     })
   }
 
@@ -41,7 +41,7 @@ export default class FramePlugin extends Plugin {
       model: (viewElement, { writer: modelWriter }) => {
         // Read the "data-xxx" attributes from the view and set them as "xxx" in the model.
         return modelWriter.createElement('frame', {
-          src: viewElement.getAttribute('data-src'),
+          html: viewElement.getAttribute('data-html'),
           type: viewElement.getAttribute('data-type')
         })
       }
@@ -54,7 +54,7 @@ export default class FramePlugin extends Plugin {
         // <section class="frame" data-id="..."></section>
         return viewWriter.createEmptyElement('section', {
           class: 'frame',
-          'data-src': modelElement.getAttribute('src'),
+          'data-html': modelElement.getAttribute('html'),
           'data-type': modelElement.getAttribute('type')
         })
       }
@@ -64,22 +64,19 @@ export default class FramePlugin extends Plugin {
     conversion.for('editingDowncast').elementToElement({
       model: 'frame',
       view: (modelElement, { writer: viewWriter }) => {
-        const src = modelElement.getAttribute('src')
+        const html = modelElement.getAttribute('html')
         const type = modelElement.getAttribute('type')
 
-        // The outermost <section class="product" data-id="..."></section> element.
         const section = viewWriter.createContainerElement('section', {
           class: 'frame',
-          'data-src': src,
+          'data-html': html,
           'data-type': type
         })
 
-        // The inner <div class="product__react-wrapper"></div> element.
-        // This element will host a React <ProductPreview /> component.
         const reactWrapper = viewWriter.createRawElement('div', {
           class: 'frame__react-wrapper'
         }, function (domElement) {
-          renderFrame({ src, type }, domElement)
+          renderFrame({ html, type }, domElement)
         })
 
         viewWriter.insert(viewWriter.createPositionAt(section, 0), reactWrapper)
