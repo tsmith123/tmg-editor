@@ -102,7 +102,13 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
       renderer: (props, domElement) => {
         const Component = plugins.frame
 
-        ReactDOM.render(<Component {...props} />, domElement)
+        const { onEdit } = handlers
+
+        const methods = {
+          onEdit: () => onEdit('html', { value: props.html })
+        }
+
+        ReactDOM.render(<Component {...props} {...methods} />, domElement)
       }
     }
   }
