@@ -34,7 +34,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
     placeholder,
     toolbar: {
       items: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'image', 'video', 'html', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|'],
-      viewportTopOffset: 130
+      viewportTopOffset: 130,
+      shouldNotGroupWhenFull: true
     },
     plugins: [
       AutoLink,
