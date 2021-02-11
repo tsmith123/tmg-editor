@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 // CKEditor 5
 import CKEditor from '@ckeditor/ckeditor5-react'
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor'
+// import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor'
 import DecoupledEditor from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor'
 
 // CKEditor 5 Plugins
@@ -115,8 +115,14 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
     }
   }
 
-  const handleOnInit = editor => {
-    onInit && onInit(editor)
+  const handleOnReady = editor => {
+    // Insert the toolbar before the editable area
+    editor.ui.getEditableElement().parentElement.insertBefore(
+      editor.ui.view.toolbar.element,
+      editor.ui.getEditableElement()
+    )
+
+    this.editor = editor
   }
 
   const handleOnChange = (ev, editor) => {
@@ -129,7 +135,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
       editor={DecoupledEditor}
       data={data}
       config={config}
-      onInit={handleOnInit}
+      onReady={handleOnReady}
+      onInit={onInit}
       onChange={handleOnChange}
     />
   )
