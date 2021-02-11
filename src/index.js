@@ -35,6 +35,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
     placeholder,
     toolbar: {
       items: ['bold', 'italic', 'strikethrough', 'superscript', '|', 'link', 'blockQuote', '|', 'numberedList', 'bulletedList', '|', 'heading', '|', 'image', 'video', 'html', '|', 'specialCharacters', 'removeFormat', '|', 'undo', 'redo', '|'],
+      viewportTopOffset: 130,
       shouldNotGroupWhenFull: true
     },
     plugins: [
@@ -114,29 +115,16 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
     }
   }
 
-  const handleOnReady = editor => {
-    // Insert the toolbar before the editable area
-    console.log(editor)
-    console.log(editor.ui.view.toolbar)
-    const test = editor.ui.getEditableElement().parentElement
-    console.log('Test', test)
-
+  // As this is the decoupled editor
+  // This is needed to render the toolbar
+  const handleOnInit = editor => {
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     )
 
-    // this.editor = editor
+    onInit && onInit(editor)
   }
-
-  // const handleOnError = ({ willEditorRestart }) => {
-  //   // If the editor is restarted, the toolbar element will be created once again.
-  //   // The `onReady` callback will be called again and the new toolbar will be added.
-  //   // This is why you need to remove the older toolbar.
-  //   if (willEditorRestart) {
-  //     this.editor.ui.view.toolbar.element.remove()
-  //   }
-  // }
 
   const handleOnChange = (ev, editor) => {
     const data = editor.getData()
@@ -148,9 +136,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
       editor={DecoupledEditor}
       data={data}
       config={config}
-      onReady={handleOnReady}
-      // onError={handleOnError}
-      onInit={onInit}
+      onInit={handleOnInit}
       onChange={handleOnChange}
     />
   )
