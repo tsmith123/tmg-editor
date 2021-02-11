@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 // CKEditor 5
 import CKEditor from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor'
+import DecoupledEditor from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor'
 
 // CKEditor 5 Plugins
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials'
@@ -125,7 +126,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
 
   return (
     <CKEditor
-      editor={ClassicEditor}
+      editor={DecoupledEditor}
       data={data}
       config={config}
       onInit={handleOnInit}
