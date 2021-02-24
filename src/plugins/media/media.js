@@ -25,7 +25,7 @@ export default class MediaPlugin extends Plugin {
       // Allow in places where other blocks are allowed (e.g. directly in the root).
       allowWhere: '$block',
 
-      allowAttributes: ['id', 'src', 'title', 'type']
+      allowAttributes: ['type', 'src', 'props']
     })
   }
 
@@ -43,10 +43,9 @@ export default class MediaPlugin extends Plugin {
       model: (viewElement, { writer: modelWriter }) => {
         // Read the "data-xxx" attributes from the view and set them as "xxx" in the model.
         return modelWriter.createElement('media', {
-          id: viewElement.getAttribute('data-id'),
+          type: viewElement.getAttribute('data-type'),
           src: viewElement.getAttribute('data-src'),
-          title: viewElement.getAttribute('data-title'),
-          type: viewElement.getAttribute('data-type')
+          props: viewElement.getAttribute('data-props')
         })
       }
     })
@@ -55,41 +54,36 @@ export default class MediaPlugin extends Plugin {
     conversion.for('dataDowncast').elementToElement({
       model: 'media',
       view: (modelElement, { writer: viewWriter }) => {
-        // <section class="media" data-id="..."></section>
+        // <section class="media" data-src="<src>"></section>
         return viewWriter.createEmptyElement('section', {
           class: 'media',
-          'data-id': modelElement.getAttribute('id'),
+          'data-type': modelElement.getAttribute('type'),
           'data-src': modelElement.getAttribute('src'),
-          'data-title': modelElement.getAttribute('title'),
-          'data-type': modelElement.getAttribute('type')
+          'data-props': modelElement.getAttribute('props')
         })
       }
     })
 
-    // <productPreview> converters (model → editing view)
     conversion.for('editingDowncast').elementToElement({
       model: 'media',
       view: (modelElement, { writer: viewWriter }) => {
-        const id = modelElement.getAttribute('id')
-        const src = modelElement.getAttribute('src')
-        const title = modelElement.getAttribute('title')
         const type = modelElement.getAttribute('type')
+        const src = modelElement.getAttribute('src')
+        const props = modelElement.getAttribute('props')
 
-        // The outermost <section class="product" data-id="..."></section> element.
+        // The outermost <section class="media" data-src="<src>"></section> element
         const section = viewWriter.createContainerElement('section', {
           class: 'media',
-          'data-id': id,
+          'data-type': type,
           'data-src': src,
-          'data-title': title,
-          'data-type': type
+          'data-props': props
         })
 
-        // The inner <div class="product__react-wrapper"></div> element.
-        // This element will host a React <ProductPreview /> component.
+        // The inner <div class="media__react-wrapper"></div> element
         const reactWrapper = viewWriter.createRawElement('div', {
           class: 'media__react-wrapper'
         }, function (domElement) {
-          renderMedia({ id, src, title, type }, domElement)
+          renderMedia({ type, src, props }, domElement)
         })
 
         viewWriter.insert(viewWriter.createPositionAt(section, 0), reactWrapper)

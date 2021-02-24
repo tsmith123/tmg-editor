@@ -86,12 +86,12 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
         const { id, type } = props
         const Component = plugins.media
 
-        const { onSwap, onReplace, onEdit } = handlers
+        const { onSwapWithLead, onUseAsLead, onReplace } = handlers
 
         const methods = {
-          onSwap: () => onSwap({ id }, 'swap'),
-          onReplace: () => onReplace({ id }, 'replace'),
-          onEdit: () => onEdit(type, { target: 'body' })
+          onSwapWithLead: () => onSwapWithLead({ id }, 'swapWithLead'),
+          onUseAsLead: () => onUseAsLead({ id }, 'useAsLead'),
+          onReplace: () => onReplace(type, { target: 'body' })
         }
 
         ReactDOM.render(<Component {...props} {...methods} />, domElement)
@@ -104,10 +104,10 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
       renderer: (props, domElement) => {
         const Component = plugins.frame
 
-        const { onEdit } = handlers
+        const { onReplace } = handlers
 
         const methods = {
-          onEdit: () => onEdit('html', { value: props.html })
+          onReplace: () => onReplace('html', { value: props.html })
         }
 
         ReactDOM.render(<Component {...props} {...methods} />, domElement)
