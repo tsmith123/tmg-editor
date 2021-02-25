@@ -82,7 +82,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
       }
     },
     media: {
-      renderer: ({ type, src, props }, domElement) => {
+      renderer: (attr, domElement) => {
+        const { type, src, props } = attr
         const Component = plugins.media
         const { onSwapWithLead, onUseAsLead, onReplace } = handlers
 
@@ -92,7 +93,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
           onReplace: () => onReplace(type, { target: 'body' })
         }
 
-        ReactDOM.render(<Component {...props} {...methods} />, domElement)
+        ReactDOM.render(<Component {...attr} {...methods} />, domElement)
       },
       handler: type => {
         onClick && onClick(type, { target: 'body' })
