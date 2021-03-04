@@ -88,8 +88,8 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
         const { onSwapWithLead, onUseAsLead, onReplace } = handlers
 
         const methods = {
-          onSwapWithLead: () => onSwapWithLead({ type, src, props, action: 'swapWithLead' }),
-          onUseAsLead: () => onUseAsLead({ type, src, props, action: 'useAsLead' }),
+          onSwapWithLead: () => onSwapWithLead({ type, src, props, action: 'swapWithLead' }, 'BODY'),
+          onUseAsLead: () => onUseAsLead({ type, src, props, action: 'useAsLead' }, 'BODY'),
           onReplace: () => onReplace(type, { target: 'body' })
         }
 
@@ -127,7 +127,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
 
   const handleOnChange = (ev, editor) => {
     const data = editor.getData()
-    onChange && onChange({ data })
+    onChange && onChange({ data }, 'BODY')
   }
 
   return (
