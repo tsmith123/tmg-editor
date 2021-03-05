@@ -36,8 +36,7 @@ export const Editor = ({
   onInit,
   onClick,
   onChange,
-  onSwap,
-  onUse,
+  onMove,
   plugins
 }) => {
   const config = {
@@ -96,8 +95,8 @@ export const Editor = ({
         const Component = plugins.media
 
         const methods = {
-          onSwapWithLead: () => onSwap({ type, src, props, action: 'swapWithLead' }),
-          onUseAsLead: () => onUse({ type, src, props, action: 'useAsLead' }),
+          onSwapWithLead: () => onMove({ type, src, props, action: 'swapWithLead' }),
+          onUseAsLead: () => onMove({ type, src, props, action: 'useAsLead' }),
           onReplace: () => onClick(type, { target: 'body' })
         }
 
