@@ -38,7 +38,6 @@ export const Editor = ({
   onChange,
   onSwap,
   onUse,
-  onReplace,
   plugins
 }) => {
   const config = {
@@ -99,7 +98,7 @@ export const Editor = ({
         const methods = {
           onSwapWithLead: () => onSwap({ type, src, props, action: 'swapWithLead' }),
           onUseAsLead: () => onUse({ type, src, props, action: 'useAsLead' }),
-          onReplace: () => onReplace(type, { target: 'body' })
+          onReplace: () => onClick(type, { target: 'body' })
         }
 
         ReactDOM.render(<Component {...attr} {...methods} />, domElement)
@@ -113,7 +112,7 @@ export const Editor = ({
         const Component = plugins.frame
 
         const methods = {
-          onReplace: () => onReplace('html', { value: props.html })
+          onReplace: () => onClick('html', { value: props.html })
         }
 
         ReactDOM.render(<Component {...props} {...methods} />, domElement)
