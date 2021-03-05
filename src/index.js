@@ -30,7 +30,17 @@ import Image from './plugins/image'
 import Video from './plugins/video'
 import Html from './plugins/html'
 
-export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, handlers }) => {
+export const Editor = ({
+  placeholder,
+  data,
+  onInit,
+  onClick,
+  onChange,
+  onSwap,
+  onUse,
+  onReplace,
+  plugins
+}) => {
   const config = {
     placeholder,
     toolbar: {
@@ -85,11 +95,10 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
       renderer: (attr, domElement) => {
         const { type, src, props } = attr
         const Component = plugins.media
-        const { onSwapWithLead, onUseAsLead, onReplace } = handlers
 
         const methods = {
-          onSwapWithLead: () => onSwapWithLead({ type, src, props }, 'BODY', { action: 'swapWithLead' }),
-          onUseAsLead: () => onUseAsLead({ type, src, props }, 'BODY', { action: 'useAsLead' }),
+          onSwapWithLead: () => onSwap({ type, src, props, action: 'swapWithLead' }),
+          onUseAsLead: () => onUse({ type, src, props, action: 'useAsLead' }),
           onReplace: () => onReplace(type, { target: 'body' })
         }
 
@@ -102,8 +111,6 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
     frame: {
       renderer: (props, domElement) => {
         const Component = plugins.frame
-
-        const { onReplace } = handlers
 
         const methods = {
           onReplace: () => onReplace('html', { value: props.html })
@@ -127,7 +134,7 @@ export const Editor = ({ placeholder, data, onInit, onChange, onClick, plugins, 
 
   const handleOnChange = (ev, editor) => {
     const data = editor.getData()
-    onChange && onChange(data, 'BODY')
+    onChange && onChange(data)
   }
 
   return (
