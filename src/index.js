@@ -98,7 +98,7 @@ export const Editor = ({
           onSwapWithLead: () => onMove({ type, src, props, action: 'swapWithLead' }),
           onUseAsLead: () => onMove({ type, src, props, action: 'useAsLead' }),
           onReplace: () => onClick(type, { target: 'body' }), // opens image or video modal in app
-          onEdit: () => onClick('meta', { value: props }) // opens meta modal in app
+          onEdit: () => onClick('meta', { type, src, props }) // opens meta modal in app
         }
 
         ReactDOM.render(<Component {...attr} {...methods} />, domElement)
