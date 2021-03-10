@@ -92,13 +92,14 @@ export const Editor = ({
     media: {
       renderer: (attr, domElement) => {
         const { type, src, props } = attr
-        const Component = plugins.media
+        const Component = plugins[type]
 
         const methods = {
           onSwapWithLead: () => onMove({ type, src, props, action: 'swapWithLead' }),
           onUseAsLead: () => onMove({ type, src, props, action: 'useAsLead' }),
           onReplace: () => onClick(type, { target: 'body' }), // opens image or video modal in app
-          onEdit: () => onClick('meta', { type, src, props }) // opens meta modal in app
+          onEdit: () => onClick('meta', { type, src, props }), // opens meta modal in app
+          onEditCrop: () => onClick('crop', { type, src, props }) // opens cropping modal in app
         }
 
         ReactDOM.render(<Component {...attr} {...methods} />, domElement)
@@ -109,7 +110,7 @@ export const Editor = ({
     },
     frame: {
       renderer: (props, domElement) => {
-        const Component = plugins.frame
+        const Component = plugins.html
 
         const methods = {
           onEdit: () => onClick('html', { value: props.html })
