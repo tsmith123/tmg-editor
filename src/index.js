@@ -37,7 +37,8 @@ export const Editor = ({
   onClick,
   onChange,
   onMove,
-  plugins
+  plugins,
+  ...rest
 }) => {
   const config = {
     placeholder,
@@ -98,8 +99,9 @@ export const Editor = ({
           onSwapWithLead: () => onMove({ type, src, props, action: 'swapWithLead' }),
           onUseAsLead: () => onMove({ type, src, props, action: 'useAsLead' }),
           onReplace: () => onClick(type, { target: 'body' }), // opens image or video modal in app
-          onEdit: () => onClick('meta', { type, src, props }), // opens meta modal in app
-          onEditCrop: () => onClick('crop', { type, src, props }) // opens cropping modal in app
+          onEdit: () => onClick('meta', { src, props }), // opens meta modal in app
+          onEditCrop: () => onClick('crop', { src, props }), // opens cropping modal in app
+          ...rest
         }
 
         ReactDOM.render(<Component {...attr} {...methods} />, domElement)
