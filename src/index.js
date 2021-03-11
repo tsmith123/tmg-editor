@@ -100,7 +100,7 @@ export const Editor = ({
           onUseAsLead: () => onMove({ type, src, props, action: 'useAsLead' }),
           onReplace: () => onClick(type, { target: 'body' }), // opens image or video modal in app
           onEdit: () => onClick('meta', { src, props }), // opens meta modal in app
-          onEditCrop: () => onClick('crop', { src, props }), // opens cropping modal in app
+          onEditCrop: () => onClick('crop', { src, props, target: 'body' }), // opens cropping modal in app
           ...rest
         }
 
