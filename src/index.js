@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // CKEditor 5
-import CKEditor from '@ckeditor/ckeditor5-react'
-// import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
 import DecoupledEditor from '@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor'
 
 // CKEditor 5 Plugins
@@ -30,10 +29,10 @@ import Image from './plugins/image'
 import Video from './plugins/video'
 import Html from './plugins/html'
 
-export const Editor = ({
+const Editor = ({
   placeholder,
   data,
-  onInit,
+  onReady,
   onClick,
   onChange,
   onMove,
@@ -125,13 +124,13 @@ export const Editor = ({
 
   // As this is the decoupled editor
   // This is needed to render the toolbar
-  const handleOnInit = editor => {
+  const handleOnReady = editor => {
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     )
 
-    onInit && onInit(editor)
+    onReady && onReady(editor)
   }
 
   const handleOnChange = (ev, editor) => {
@@ -144,8 +143,16 @@ export const Editor = ({
       editor={DecoupledEditor}
       data={data}
       config={config}
-      onInit={handleOnInit}
+      onReady={handleOnReady}
       onChange={handleOnChange}
     />
   )
+}
+
+console.log('CKEditor', CKEditor)
+console.log('Decoupled', DecoupledEditor)
+console.log('Editor', Editor)
+
+export {
+  Editor
 }
