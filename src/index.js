@@ -29,7 +29,7 @@ import Image from './plugins/image'
 import Video from './plugins/video'
 import Html from './plugins/html'
 
-const Editor = ({
+export const Editor = ({
   placeholder,
   data,
   onReady,
@@ -147,12 +147,4 @@ const Editor = ({
       onChange={handleOnChange}
     />
   )
-}
-
-console.log('CKEditor', CKEditor)
-console.log('Decoupled', DecoupledEditor)
-console.log('Editor', Editor)
-
-export {
-  Editor
 }
