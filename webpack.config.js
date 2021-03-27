@@ -1,6 +1,6 @@
 const path = require('path')
 const { styles } = require('@ckeditor/ckeditor5-dev-utils')
-const CompressionPlugin = require('compression-webpack-plugin')
+// const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
   mode: 'production',
@@ -11,7 +11,7 @@ module.exports = {
     library: 'TmgEditor',
     libraryTarget: 'commonjs2'
   },
-  plugins: [new CompressionPlugin()],
+  // plugins: [new CompressionPlugin()],
   externals: {
     // Don't bundle react or react-dom
     react: {
