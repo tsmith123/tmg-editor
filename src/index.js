@@ -21,6 +21,7 @@ import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js'
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters.js'
 import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/src/specialcharactersessentials'
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice'
+import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount'
 
 // Our Plugins
 import Media from './plugins/media'
@@ -66,7 +67,8 @@ export const Editor = ({
       SpecialCharacters,
       SpecialCharactersEssentials,
       Superscript,
-      Video
+      Video,
+      WordCount
     ],
     heading: {
       options: [

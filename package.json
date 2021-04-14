@@ -29,7 +29,8 @@
     "@ckeditor/ckeditor5-remove-format": "^27.0.0",
     "@ckeditor/ckeditor5-special-characters": "^27.0.0",
     "@ckeditor/ckeditor5-theme-lark": "^27.0.0",
-    "@ckeditor/ckeditor5-widget": "^27.0.0"
+    "@ckeditor/ckeditor5-widget": "^27.0.0",
+    "@ckeditor/ckeditor5-word-count": "^27.0.0"
   },
   "peerDependencies": {
     "react": "^16.x",
