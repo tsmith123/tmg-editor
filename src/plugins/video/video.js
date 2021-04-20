@@ -10,7 +10,7 @@ export default class Video extends Plugin {
       const view = new ButtonView()
 
       view.set({
-        label: 'Insert Video',
+        label: 'Embed video',
         icon,
         tooltip: true
       })

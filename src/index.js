@@ -12,6 +12,7 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph'
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold'
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic'
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough'
+import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard'
 import List from '@ckeditor/ckeditor5-list/src/list'
 import Link from '@ckeditor/ckeditor5-link/src/link'
 import AutoLink from '@ckeditor/ckeditor5-link/src/autolink'
@@ -51,6 +52,7 @@ export const Editor = ({
       AutoLink,
       BlockQuote,
       Bold,
+      Clipboard,
       Essentials,
       Frame,
       Heading,
