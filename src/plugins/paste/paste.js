@@ -18,22 +18,22 @@ export default class Paste extends Plugin {
     editor.plugins.get('ClipboardPipeline').on(
       'inputTransformation',
       (evt, data) => {
-        console.log('Content', data.content)
         const writer = new UpcastWriter(viewDocument)
 
         const children = data.content.getChildren()
 
         for (const child of children) {
-          const test1 = child.is('element', 'br')
-          const test2 = child.nextSibling.is('element', 'br')
+          const isCurrent = child.is('element', 'br')
+          const isPrev = child.previousSibling && child.previousSibling.is('element', 'br')
+          const isNext = child.nextSibling && child.nextSibling.is('element', 'br')
 
-          console.log('Child', test1)
-          console.log('Sibling', test2)
+          // If single br tag found then remove it
+          if (isCurrent && !isPrev && !isNext) {
+            const childIndex = data.content.getChildIndex(child)
 
-          // const childIndex = data.content.getChildIndex(child)
-
-          // writer.remove(child)
-          // writer.insertChild(childIndex, child.getChildren(), data.content)
+            writer.remove(child)
+            writer.insertChild(childIndex, child.getChildren(), data.content)
+          }
         }
       },
       { priority: 'high' }
