@@ -20,8 +20,8 @@ export default class Paste extends Plugin {
       (evt, data) => {
         const writer = new UpcastWriter(viewDocument)
 
+        console.log(data.content)
         const children = data.content.getChildren()
-        console.log(children)
 
         for (const child of children) {
           const isCurrent = child.is('element', 'br')
@@ -29,7 +29,7 @@ export default class Paste extends Plugin {
           const isNext = child.nextSibling && child.nextSibling.is('element', 'br')
 
           if (!isCurrent) {
-            console.log(child.data())
+            console.log(child.data)
           }
 
           // If single br tag found then remove it
