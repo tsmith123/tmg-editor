@@ -30,13 +30,10 @@ export default class Paste extends Plugin {
 
           // If single br tag found then remove it
           if (isCurrent && !isPrev && !isNext) {
-            const childIndex = data.content.getChildIndex(child)
-
-            child.previousSibling.data('Testing')
-            // child.nextSibling.data(' ' + child.nextSibling.data)
-
             writer.remove(child) // remove br tag
-            writer.insertChild(childIndex, child.getChildren(), data.content)
+            child.previousSibling.data = 'Testing'
+            // const childIndex = data.content.getChildIndex(child)
+            // writer.insertChild(childIndex, child.getChildren(), data.content)
           }
         }
       },
