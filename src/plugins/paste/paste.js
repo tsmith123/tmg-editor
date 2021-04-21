@@ -32,11 +32,9 @@ export default class Paste extends Plugin {
           if (isCurrent && !isPrev && !isNext) {
             const childIndex = data.content.getChildIndex(child)
 
-            writer.remove(child)
+            child.nextSibling.data(' ' + child.nextSibling.data)
 
-            const space = writer.createText(' ')
-            writer.appendChild(space, child.previousSibling)
-
+            writer.remove(child) // remove br tag
             writer.insertChild(childIndex, child.getChildren(), data.content)
           }
         }
