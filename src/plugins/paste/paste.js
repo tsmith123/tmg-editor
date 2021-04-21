@@ -19,22 +19,26 @@ export default class Paste extends Plugin {
       'inputTransformation',
       (evt, data) => {
         const writer = new UpcastWriter(viewDocument)
+        console.log(data.content)
 
         const children = data.content.getChildren()
 
+        let updateNext = false
         for (const child of children) {
           const isCurrent = child.is('element', 'br')
           const isPrev = child.previousSibling && child.previousSibling.is('element', 'br')
           const isNext = child.nextSibling && child.nextSibling.is('element', 'br')
 
+          if (updateNext) {
+            child._data = ' ' + child.data
+            updateNext = false
+          }
+
           // If single br tag found then remove it
           if (isCurrent && !isPrev && !isNext) {
-            const nextSiblingData = child.nextSibling.data
-            child.nextSibling._data = ' ' + nextSiblingData
+            updateNext = true
 
-            writer.remove(child) // remove br tag
-            // const childIndex = data.content.getChildIndex(child)
-            // writer.insertChild(childIndex, child.getChildren(), data.content)
+            writer.remove(child)
           }
         }
       },
