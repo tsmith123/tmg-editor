@@ -24,15 +24,16 @@ export default class Paste extends Plugin {
         const children = data.content.getChildren()
 
         for (const child of children) {
-          const isMidParagraphBreak = child.is('element', 'br')
-          console.log(isMidParagraphBreak)
+          const test1 = child.is('element', 'br')
+          const test2 = child.nextSibling.is('element', 'br')
 
-          const childIndex = data.content.getChildIndex(child)
+          console.log('Child', test1)
+          console.log('Sibling', test2)
 
-          writer.remove(child)
-          writer.insertChild(childIndex, child.getChildren(), data.content)
+          // const childIndex = data.content.getChildIndex(child)
 
-          console.log(child.nextSibling)
+          // writer.remove(child)
+          // writer.insertChild(childIndex, child.getChildren(), data.content)
         }
       },
       { priority: 'high' }
