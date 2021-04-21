@@ -22,15 +22,31 @@ export default class Paste extends Plugin {
         console.log('Content', data.content)
         const writer = new UpcastWriter(viewDocument)
 
-        for (const child of data.content.getChildren()) {
-          console.log('Child', child)
-          // if (child.is('element', 'b') && child.getStyle('font-weight') === 'normal') {
-          //   const childIndex = data.content.getChildIndex(child)
+        const children = data.content.getChildren()
+        console.log('Children', children)
 
-          //   writer.remove(child)
-          //   writer.insertChild(childIndex, child.getChildren(), documentFragment)
-          // }
+        for (let i = 0; i < children.length; i++) {
+          const isLastChild = i === children.length - 1
+          const child = children[i]
+          const nextChild = children[i + 1]
+
+          const isMidParagraphBreak = child.is('element', 'br') && !isLastChild && !nextChild.is('element', 'br')
+          console.log(isMidParagraphBreak)
+
+          const childIndex = data.content.getChildIndex(child)
+
+          writer.remove(child)
+          writer.insertChild(childIndex, child.getChildren(), data.content)
         }
+
+        // for (const child of children) {
+        // if (child.is('element', 'b') && child.getStyle('font-weight') === 'normal') {
+        //   const childIndex = data.content.getChildIndex(child)
+
+        //   writer.remove(child)
+        //   writer.insertChild(childIndex, child.getChildren(), documentFragment)
+        // }
+        // }
       },
       { priority: 'high' }
     )
