@@ -18,12 +18,19 @@ export default class Paste extends Plugin {
     editor.plugins.get('ClipboardPipeline').on(
       'inputTransformation',
       (evt, data) => {
-        const htmlString = data.dataTransfer.getData('text/html')
-        console.log(htmlString)
-
+        console.log('Data', data)
+        console.log('Content', data.content)
         const writer = new UpcastWriter(viewDocument)
 
-        console.log('Writer', writer)
+        for (const child of data.content.getChildren()) {
+          console.log('Child', child)
+          // if (child.is('element', 'b') && child.getStyle('font-weight') === 'normal') {
+          //   const childIndex = data.content.getChildIndex(child)
+
+          //   writer.remove(child)
+          //   writer.insertChild(childIndex, child.getChildren(), documentFragment)
+          // }
+        }
       },
       { priority: 'high' }
     )
