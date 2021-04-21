@@ -21,19 +21,16 @@ export default class Paste extends Plugin {
         const writer = new UpcastWriter(viewDocument)
 
         const children = data.content.getChildren()
+        console.log(children)
 
         for (const child of children) {
-          console.log(child)
           const isCurrent = child.is('element', 'br')
           const isPrev = child.previousSibling && child.previousSibling.is('element', 'br')
           const isNext = child.nextSibling && child.nextSibling.is('element', 'br')
 
-          // span
-          // br
-          // span
-          // br
-          // br
-          // span
+          if (!isCurrent) {
+            console.log(child.data())
+          }
 
           // If single br tag found then remove it
           if (isCurrent && !isPrev && !isNext) {
