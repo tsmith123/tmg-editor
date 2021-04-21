@@ -28,15 +28,14 @@ export default class Paste extends Plugin {
           const isPrev = child.previousSibling && child.previousSibling.is('element', 'br')
           const isNext = child.nextSibling && child.nextSibling.is('element', 'br')
 
-          if (!isCurrent) {
-            console.log(child.data)
-          }
-
           // If single br tag found then remove it
           if (isCurrent && !isPrev && !isNext) {
             const childIndex = data.content.getChildIndex(child)
 
             writer.remove(child)
+
+            const space = writer.createText(' ')
+            writer.appendChild(space, child.previousSibling)
 
             writer.insertChild(childIndex, child.getChildren(), data.content)
           }
