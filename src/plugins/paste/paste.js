@@ -30,7 +30,7 @@ export default class Paste extends Plugin {
           const isNext = child.nextSibling && child.nextSibling.is('element', 'br')
 
           if (updateNext) {
-            child._data = ' ' + child.data
+            child._data = 'Testing'
             updateNext = false
           }
 
