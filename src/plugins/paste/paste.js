@@ -4,7 +4,7 @@ import { UpcastWriter } from 'ckeditor5/src/engine'
 
 export default class Paste extends Plugin {
   static get pluginName () {
-    return 'PasteFromOffice'
+    return 'PasteSpecial'
   }
 
   static get requires () {
@@ -21,7 +21,7 @@ export default class Paste extends Plugin {
         const htmlString = data.dataTransfer.getData('text/html')
         console.log(htmlString)
 
-        const writer = new UpcastWriter(this.document)
+        const writer = new UpcastWriter(viewDocument)
 
         console.log('Writer', writer)
       },
