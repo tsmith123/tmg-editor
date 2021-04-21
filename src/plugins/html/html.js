@@ -10,7 +10,7 @@ export default class Html extends Plugin {
       const view = new ButtonView()
 
       view.set({
-        label: 'Embed particle/other',
+        label: 'Embed particle / other',
         icon,
         tooltip: true
       })
