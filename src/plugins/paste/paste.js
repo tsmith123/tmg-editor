@@ -31,7 +31,7 @@ export default class Paste extends Plugin {
           const isNext = child.nextSibling && child.nextSibling.is('element', 'br')
 
           if (count === 1) {
-            child.data('Testing ')
+            child._data('Testing ')
           }
 
           if (count === 2) {
