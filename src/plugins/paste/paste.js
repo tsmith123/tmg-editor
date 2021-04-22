@@ -23,22 +23,18 @@ export default class Paste extends Plugin {
 
         const children = data.content.getChildren()
 
-        let updateNext = false
         for (const child of children) {
           const isCurrent = child.is('element', 'br')
           const isPrev = child.previousSibling && child.previousSibling.is('element', 'br')
           const isNext = child.nextSibling && child.nextSibling.is('element', 'br')
 
-          if (updateNext) {
-            child._data = 'Testing'
-            updateNext = false
-          }
-
           // If single br tag found then remove it
           if (isCurrent && !isPrev && !isNext) {
-            updateNext = true
-
             writer.remove(child)
+
+            const textNode = writer.createText('&nbsp;')
+            console.log('Text', textNode)
+            writer.replace(child, textNode)
           }
         }
       },
