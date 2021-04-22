@@ -61,7 +61,7 @@ export const Editor = ({
       Link,
       List,
       Media,
-      PasteSpecial,
+      // PasteSpecial,
       PasteFromOffice,
       Paragraph,
       RemoveFormat,
