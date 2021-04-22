@@ -19,8 +19,6 @@ export default class Paste extends Plugin {
       'inputTransformation',
       (evt, data) => {
         const writer = new UpcastWriter(viewDocument)
-        console.log(data.content)
-
         const children = data.content.getChildren()
 
         for (const child of children) {
@@ -34,9 +32,8 @@ export default class Paste extends Plugin {
 
             writer.remove(child)
 
-            const textNode = writer.createText('&nbsp;')
+            const textNode = writer.createText(' ')
             writer.insertChild(childIndex, textNode, data.content)
-            // writer.replace(child, textNode)
           }
         }
       },
