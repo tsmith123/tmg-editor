@@ -29,7 +29,7 @@ import Frame from './plugins/frame'
 import Image from './plugins/image'
 import Video from './plugins/video'
 import Html from './plugins/html'
-import PasteSpecial from './plugins/paste'
+// import PasteSpecial from './plugins/paste'
 
 export const Editor = ({
   placeholder,
@@ -61,7 +61,7 @@ export const Editor = ({
       Link,
       List,
       Media,
-      PasteSpecial,
+      // PasteSpecial,
       PasteFromOffice,
       Paragraph,
       RemoveFormat,

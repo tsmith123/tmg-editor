@@ -41,7 +41,7 @@ export default class Paste extends Plugin {
           }
         }
       },
-      { priority: 'high' }
+      { priority: 'low' }
     )
   }
 }
