@@ -19,7 +19,7 @@ export default class Paste extends Plugin {
       'inputTransformation',
       (evt, data) => {
         const writer = new UpcastWriter(viewDocument)
-        console.log(data.content)
+        // console.log(data.content)
 
         const children = data.content.getChildren()
 
@@ -32,7 +32,7 @@ export default class Paste extends Plugin {
           if (isCurrent && !isPrev && !isNext) {
             const childIndex = data.content.getChildIndex(child)
 
-            console.log('Removing child', childIndex)
+            // console.log('Removing child', childIndex)
 
             writer.remove(child)
 

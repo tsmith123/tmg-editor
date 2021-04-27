@@ -61,7 +61,7 @@ export const Editor = ({
       Link,
       List,
       Media,
-      // PasteSpecial,
+      PasteSpecial,
       PasteFromOffice,
       Paragraph,
       RemoveFormat,
@@ -81,7 +81,7 @@ export const Editor = ({
       ]
     },
     link: {
-      defaultProtocol: 'http://',
+      defaultProtocol: 'https://',
       decorators: {
         addTargetToExternalLinks: {
           mode: 'manual',
