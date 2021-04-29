@@ -29,7 +29,8 @@ import Frame from './plugins/frame'
 import Image from './plugins/image'
 import Video from './plugins/video'
 import Html from './plugins/html'
-// import PasteSpecial from './plugins/paste'
+import PasteSpecial from './plugins/paste'
+import ItalicsAsEm from './plugins/italicsAsEm'
 
 export const Editor = ({
   placeholder,
@@ -58,10 +59,11 @@ export const Editor = ({
       Html,
       Image,
       Italic,
+      ItalicsAsEm,
       Link,
       List,
       Media,
-      // PasteSpecial,
+      PasteSpecial,
       PasteFromOffice,
       Paragraph,
       RemoveFormat,
