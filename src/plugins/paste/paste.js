@@ -23,6 +23,9 @@ export default class Paste extends Plugin {
 
       const separator = 'br'
 
+      // If pasted content already contains p tags
+      // then assume it's coming from Google doc or similar
+      // and just remove all br tags that seem to be added during the copy/paste flow
       if (children.some(child => child.name === 'p')) {
         for (const child of children) {
           if (child.name === separator) {
@@ -30,6 +33,9 @@ export default class Paste extends Plugin {
           }
         }
       } else {
+        // If no praragraphs then assume source is gmail client
+        // and group children into paragraphs and remove multiple br tags
+        // and switch single br tags for spaces
         const blocks = children.reduce((acc, val, i, arr) => {
           if (val.name === separator) {
             if (arr[i - 1]?.name === separator) {
